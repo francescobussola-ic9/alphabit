@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vero o falso? Fallacie matematiche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --primary-dark: #4078B2;
+      --ok: #15803d;
+      --ko: #b91c1c;
+      --border: #e5e7eb;
+      --soft-blue: #eff6ff;
+      --soft-green: #ecfdf5;
+      --soft-red: #fef2f2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4078B2, #3b82f6);
+      color: white;
+      padding: 42px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    header p {
+      margin: 0 auto;
+      max-width: 760px;
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    main {
+      width: min(1000px, 94%);
+      margin: 32px auto 60px;
+    }
+
+    .intro {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .exercise {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .exercise h2 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+    }
+
+    .statement {
+      font-size: 1.15rem;
+      margin: 0 0 18px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.12s ease, opacity 0.12s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .choice {
+      background: var(--soft-blue);
+      color: var(--primary-dark);
+      border: 1px solid #bfdbfe;
+    }
+
+    .choice.selected {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .solution-toggle {
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid var(--border);
+    }
+
+    .feedback {
+      min-height: 28px;
+      margin: 8px 0 0;
+      font-weight: 700;
+    }
+
+    .feedback.correct {
+      color: var(--ok);
+    }
+
+    .feedback.wrong {
+      color: var(--ko);
+    }
+
+    .solution {
+      display: none;
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #f9fafb;
+      border: 1px dashed #cbd5e1;
+    }
+
+    .solution.open {
+      display: block;
+    }
+
+    .solution strong {
+      color: var(--primary-dark);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 20px;
+      font-size: 0.95rem;
+    }
+	.header-img {
+	  width: 100%;
+	  max-height: 420px;
+	  object-fit: cover;
+	  border-radius: 0 0 20px 20px;
+	  margin-bottom: 10px;
+	}
+	.top-menu {
+		width: 100%;
+		background: #ffffff;
+		padding: 12px 30px;
+		display: flex;
+		justify-content: flex-end; /* allinea a destra */
+		align-items: center;
+		border-bottom: 1px solid #e5e7eb;
+	  }
+
+	  .top-menu a {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 14pt;
+		text-decoration: none;
+		color: #1f2937;
+		font-weight: 400;
+	  }
+
+	  .top-menu a:hover {
+		color: #2563eb;
+	  }
+
+  </style>
+</head>
+<body>
+	<div>
+		<img src="images/headeralphabit.png" width="100%" alt="Header" class="header-img">
+	</div>
+	<nav class="top-menu">
+		<a href="https://sites.google.com/ic9verona.edu.it/alphabit/home-page">Home page</a>
+	</nav>
+	<header>
+		<h1>Percentuali: vero o falso? Attenzione alle trappole!</h1>
+		<p>Controlla le affermazioni per ragionare su percentuali, aumenti, sconti e trabocchetti matematici.</p>
+	</header>
+
+  <main>
+    <section class="intro">
+      <p><strong>Come funziona:</strong> leggi ogni affermazione, scegli “vero” o “falso” e controlla il feedback. Poi puoi aprire la soluzione per vedere il ragionamento.</p>
+    </section>
+
+    <div id="exercises"></div>
+  </main>
+
+  <footer>
+    CC BY-NC 4.0 Francesco Bussola – alphabit, IC9 Verona
+  </footer>
+
+  <script>
+    const exercises = [
+      {
+        text: "Il prezzo di un oggetto può aumentare del 600% e può anche diminuire del 600%.",
+        answer: false,
+        solution: `Facciamo un esempio con un prezzo iniziale di 10 €.<br><br>
+          <strong>Aumento del 600%:</strong><br>
+          600% di 10 € = 60 €.<br>
+          Quindi il nuovo prezzo è 10 € + 60 € = 70 €.<br><br>
+          Oppure: aumentare del 600% significa moltiplicare per 7, perché il prezzo finale è 100% + 600% = 700% del prezzo iniziale.<br>
+          700% di 10 € = 70 €.<br><br>
+          <strong>Diminuzione del 600%:</strong><br>
+          Se provo a diminuire 70 € del 600%, dovrei togliere 600% di 70 €, cioè 420 €.<br>
+          70 € - 420 € = -350 €.<br><br>
+          <strong>Conclusione:</strong> un prezzo negativo non ha senso. Quindi l'affermazione è falsa: alcune percentuali, nel mondo reale, non possono essere usate in modo simmetrico.`
+      },
+      {
+        text: "Se aumento un prezzo del 50% e poi lo diminuisco del 50%, torno al prezzo iniziale.",
+        answer: false,
+        solution: `Partiamo da 100 €.<br><br>
+          <strong>Primo passaggio: aumento del 50%.</strong><br>
+          50% di 100 € = 50 €.<br>
+          100 € + 50 € = 150 €.<br><br>
+          <strong>Secondo passaggio: diminuzione del 50%.</strong><br>
+          Attenzione: ora il 50% si calcola su 150 €, non più su 100 €.<br>
+          50% di 150 € = 75 €.<br>
+          150 € - 75 € = 75 €.<br><br>
+          <strong>Conclusione:</strong> il prezzo finale è 75 €, non 100 €. L'affermazione è falsa perché la base di calcolo cambia.`
+      },
+      {
+        text: "Uno sconto del 30% seguito da un altro sconto del 30% equivale a uno sconto totale del 60%.",
+        answer: false,
+        solution: `Partiamo da un prezzo di 100 €.<br><br>
+          <strong>Primo sconto del 30%:</strong><br>
+          30% di 100 € = 30 €.<br>
+          100 € - 30 € = 70 €.<br><br>
+          <strong>Secondo sconto del 30%:</strong><br>
+          Il secondo sconto si calcola sul nuovo prezzo, cioè su 70 €.<br>
+          30% di 70 € = 21 €.<br>
+          70 € - 21 € = 49 €.<br><br>
+          <strong>Controlliamo lo sconto totale:</strong><br>
+          Da 100 € siamo arrivati a 49 €.<br>
+          Abbiamo risparmiato 51 €, cioè il 51% di 100 €.<br><br>
+          <strong>Conclusione:</strong> due sconti del 30% non fanno uno sconto del 60%. L'affermazione è falsa.`
+      },
+      {
+        text: "Se raddoppio una quantità e poi la dimezzo, torno sempre al valore di partenza.",
+        answer: true,
+        solution: `Partiamo da 40.<br><br>
+          <strong>Raddoppiare</strong> significa moltiplicare per 2:<br>
+          40 × 2 = 80.<br><br>
+          <strong>Dimezzare</strong> significa dividere per 2:<br>
+          80 : 2 = 40.<br><br>
+          <strong>Conclusione:</strong> in questo caso si torna al numero iniziale. L'affermazione è vera perché moltiplicare per 2 e poi dividere per 2 sono operazioni inverse.`
+      },
+      {
+        text: "Se una classe passa da 20 a 30 studenti e poi torna a 20, la percentuale di aumento e quella di diminuzione sono uguali.",
+        answer: false,
+        solution: `Partiamo da una classe con 20 studenti.<br><br>
+          <strong>Da 20 a 30 studenti:</strong><br>
+          L'aumento è di 10 studenti.<br>
+          Per trovare la percentuale, confronto l'aumento con il valore iniziale:<br>
+          10 su 20 = 10/20 = 0,5 = 50%.<br>
+          Quindi l'aumento è del 50%.<br><br>
+          <strong>Da 30 a 20 studenti:</strong><br>
+          La diminuzione è sempre di 10 studenti, ma ora il valore di partenza è 30.<br>
+          10 su 30 = 10/30 = 0,333... = circa 33,3%.<br>
+          Quindi la diminuzione è circa del 33,3%.<br><br>
+          <strong>Conclusione:</strong> il numero di studenti cambia sempre di 10, ma le percentuali sono diverse perché cambia il valore di riferimento. L'affermazione è falsa.`
+      },
+      {
+        text: "Se il prezzo di un oggetto aumenta del 100%, basta uno sconto del 50% per tornare al prezzo iniziale.",
+        answer: true,
+        solution: `Partiamo da un prezzo di 100 €.<br><br>
+          <strong>Aumento del 100%:</strong><br>
+          100% di 100 € = 100 €.<br>
+          100 € + 100 € = 200 €.<br><br>
+          <strong>Sconto del 50%:</strong><br>
+          Ora il 50% si calcola su 200 €.<br>
+          50% di 200 € = 100 €.<br>
+          200 € - 100 € = 100 €.<br><br>
+          <strong>Conclusione:</strong> si torna al prezzo iniziale. L'affermazione è vera, ma non perché 100% e 50% siano uguali: funziona perché il 50% viene calcolato su un valore raddoppiato.`
+      },
+      {
+        text: "Se una quantità diminuisce del 100%, può poi aumentare del 100% e tornare com'era prima.",
+        answer: false,
+        solution: `Partiamo da 50.<br><br>
+          <strong>Diminuzione del 100%:</strong><br>
+          100% di 50 = 50.<br>
+          50 - 50 = 0.<br><br>
+          <strong>Aumento del 100%:</strong><br>
+          Ora dobbiamo aumentare 0 del 100%.<br>
+          100% di 0 = 0.<br>
+          0 + 0 = 0.<br><br>
+          <strong>Conclusione:</strong> dopo essere arrivati a zero, un aumento percentuale non permette di tornare al valore iniziale. L'affermazione è falsa.`
+      },
+      {
+        text: "Se aggiungo il 10% a un numero e poi tolgo il 10%, il risultato è sempre lo stesso numero di partenza.",
+        answer: false,
+        solution: `Partiamo da 100.<br><br>
+          <strong>Aggiungo il 10%:</strong><br>
+          10% di 100 = 10.<br>
+          100 + 10 = 110.<br><br>
+          <strong>Tolgo il 10%:</strong><br>
+          Attenzione: ora il 10% si calcola su 110.<br>
+          10% di 110 = 11.<br>
+          110 - 11 = 99.<br><br>
+          <strong>Conclusione:</strong> il risultato è 99, non 100. L'affermazione è falsa perché il secondo 10% viene calcolato su una base diversa.`
+      },
+      {
+        text: "Se due prodotti hanno entrambi uno sconto del 20%, allora il risparmio totale è il 20% della spesa complessiva iniziale.",
+        answer: true,
+        solution: `Facciamo un esempio con due prodotti: uno costa 50 € e uno costa 100 €.<br><br>
+          <strong>Spesa iniziale totale:</strong><br>
+          50 € + 100 € = 150 €.<br><br>
+          <strong>Sconto del 20% sul primo prodotto:</strong><br>
+          20% di 50 € = 10 €.<br>
+          50 € - 10 € = 40 €.<br><br>
+          <strong>Sconto del 20% sul secondo prodotto:</strong><br>
+          20% di 100 € = 20 €.<br>
+          100 € - 20 € = 80 €.<br><br>
+          <strong>Nuova spesa totale:</strong><br>
+          40 € + 80 € = 120 €.<br>
+          Risparmio totale: 150 € - 120 € = 30 €.<br><br>
+          <strong>Controllo:</strong><br>
+          20% di 150 € = 30 €.<br><br>
+          <strong>Conclusione:</strong> l'affermazione è vera: se tutti i prodotti hanno lo stesso sconto percentuale, anche il totale viene ridotto della stessa percentuale.`
+      },
+      {
+        text: "Se una popolazione cresce del 200% e poi diminuisce del 200%, torna al valore iniziale.",
+        answer: false,
+        solution: `Partiamo da una popolazione di 100 persone.<br><br>
+          <strong>Crescita del 200%:</strong><br>
+          200% di 100 = 200.<br>
+          100 + 200 = 300.<br>
+          Quindi la popolazione è triplicata.<br><br>
+          <strong>Diminuzione del 200%:</strong><br>
+          Ora il 200% si calcola su 300.<br>
+          200% di 300 = 600.<br>
+          300 - 600 = -300.<br><br>
+          <strong>Conclusione:</strong> una popolazione negativa non ha senso. L'affermazione è falsa: una diminuzione del 200% non è realistica in questo contesto.`
+      },
+      {
+        text: "Se aumento una quantità del 25% quattro volte di seguito, è come aumentarla del 100% una sola volta.",
+        answer: false,
+        solution: `Partiamo da 100.<br><br>
+          <strong>Primo aumento del 25%:</strong><br>
+          25% di 100 = 25.<br>
+          100 + 25 = 125.<br><br>
+          <strong>Secondo aumento del 25%:</strong><br>
+          25% di 125 = 31,25.<br>
+          125 + 31,25 = 156,25.<br><br>
+          <strong>Terzo aumento del 25%:</strong><br>
+          25% di 156,25 = 39,0625.<br>
+          156,25 + 39,0625 = 195,3125.<br><br>
+          <strong>Quarto aumento del 25%:</strong><br>
+          25% di 195,3125 = 48,828125.<br>
+          195,3125 + 48,828125 = 244,140625.<br><br>
+          <strong>Confronto:</strong><br>
+          Un solo aumento del 100% su 100 porterebbe a 200.<br>
+          Quattro aumenti successivi del 25% portano invece a circa 244,14.<br><br>
+          <strong>Conclusione:</strong> l'affermazione è falsa perché ogni aumento successivo si calcola su un valore sempre più grande.`
+      }
+    ];
+
+    const container = document.getElementById("exercises");
+
+    exercises.forEach((exercise, index) => {
+      const card = document.createElement("section");
+      card.className = "exercise";
+
+      card.innerHTML = `
+        <h2>Esercizio ${index + 1}</h2>
+        <p class="statement">“${exercise.text}”<br><strong>Vero o falso? Argomenta.</strong></p>
+        <div class="controls">
+          <button class="choice" data-choice="true">Vero</button>
+          <button class="choice" data-choice="false">Falso</button>
+          <button class="solution-toggle">Mostra soluzione</button>
+        </div>
+        <p class="feedback" aria-live="polite"></p>
+        <div class="solution">
+          <strong>Soluzione:</strong> ${exercise.solution}
+        </div>
+      `;
+
+      const choiceButtons = card.querySelectorAll(".choice");
+      const feedback = card.querySelector(".feedback");
+      const solution = card.querySelector(".solution");
+      const solutionToggle = card.querySelector(".solution-toggle");
+
+      choiceButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          choiceButtons.forEach(btn => btn.classList.remove("selected"));
+          button.classList.add("selected");
+
+          const selected = button.dataset.choice === "true";
+          const isCorrect = selected === exercise.answer;
+
+          feedback.className = "feedback " + (isCorrect ? "correct" : "wrong");
+          feedback.textContent = isCorrect
+            ? "Risposta corretta. Ora prova ad argomentare il perché."
+            : "Risposta non corretta. Controlla bene qual è la base su cui si calcola la percentuale.";
+        });
+      });
+
+      solutionToggle.addEventListener("click", () => {
+        solution.classList.toggle("open");
+        solutionToggle.textContent = solution.classList.contains("open")
+          ? "Nascondi soluzione"
+          : "Mostra soluzione";
+      });
+
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
