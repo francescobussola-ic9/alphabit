@@ -280,6 +280,347 @@
         answer: false,
         solution: `Partiamo da una classe con 20 studenti.<br><br>
           <strong>Da 20 a 30 studenti:</strong><br>
+	<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz! Le percentuali</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --primary-dark: #4078B2;
+      --ok: #15803d;
+      --ko: #b91c1c;
+      --border: #e5e7eb;
+      --soft-blue: #eff6ff;
+      --soft-green: #ecfdf5;
+      --soft-red: #fef2f2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4078B2, #3b82f6);
+      color: white;
+      padding: 42px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    header p {
+      margin: 0 auto;
+      max-width: 760px;
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    main {
+      width: min(1000px, 94%);
+      margin: 32px auto 60px;
+    }
+
+    .intro {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .exercise {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .exercise h2 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+    }
+
+    .statement {
+      font-size: 1.15rem;
+      margin: 0 0 18px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.12s ease, opacity 0.12s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .choice {
+      background: var(--soft-blue);
+      color: var(--primary-dark);
+      border: 1px solid #bfdbfe;
+    }
+
+    .choice.selected {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .solution-toggle {
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid var(--border);
+    }
+
+    .feedback {
+      min-height: 28px;
+      margin: 8px 0 0;
+      font-weight: 700;
+    }
+
+    .feedback.correct {
+      color: var(--ok);
+    }
+
+    .feedback.wrong {
+      color: var(--ko);
+    }
+
+    .solution {
+      display: none;
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #f9fafb;
+      border: 1px dashed #cbd5e1;
+    }
+
+    .solution.open {
+      display: block;
+    }
+
+    .solution strong {
+      color: var(--primary-dark);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 20px;
+      font-size: 0.95rem;
+    }
+	.header-img {
+	  width: 100%;
+	  max-height: 420px;
+	  object-fit: cover;
+	  border-radius: 0 0 20px 20px;
+	  margin-bottom: 10px;
+	}
+	.top-menu {
+		width: 100%;
+		background: #ffffff;
+		padding: 12px 30px;
+		display: flex;
+		justify-content: flex-end; /* allinea a destra */
+		align-items: center;
+		border-bottom: 1px solid #e5e7eb;
+	  }
+
+	  .top-menu a {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 14pt;
+		text-decoration: none;
+		color: #1f2937;
+		font-weight: 400;
+	  }
+
+	  .top-menu a:hover {
+		color: #2563eb;
+	  }
+
+  </style>
+</head>
+<body>
+	<div>
+		<img src="images/headeralphabit.png" width="80%" alt="Header" class="header-img">
+	</div>
+  <nav class="top-menu">
+    <a href="https://sites.google.com/ic9verona.edu.it/alphabit/home-page">Home</a>
+  </nav>
+
+  <header>
+    <h1>Capire le percentuali: variazioni e trasformazioni</h1>
+    <p>Verifica se hai davvero compreso come funzionano le percentuali!</p>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p><strong>Come funziona:</strong> prendi un foglio di carta e una penna e leggi ogni domanda. Dopo aver ragionato, scegli una risposta e controlla se la tua idea è giusta. Poi puoi aprire la soluzione per vedere il ragionamento passo dopo passo.</p>
+    </section>
+
+    <div id="exercises"></div>
+  </main>
+
+  <footer>
+    CC BY-NC 4.0 Francesco Bussola – alphabit, IC9 Verona
+  </footer>
+
+  
+	<script>
+    const exercises = [
+      {
+        text: "Il prezzo di un oggetto può aumentare del 600% e può anche diminuire del 600%.",
+        answer: false,
+        solution: `Facciamo un esempio con un prezzo iniziale di 10 €.<br><br>
+          <strong>Aumento del 600%:</strong><br>
+          600% di 10 € = 60 €.<br>
+          Quindi il nuovo prezzo è 10 € + 60 € = 70 €.<br><br>
+          Oppure: aumentare del 600% significa moltiplicare per 7, perché il prezzo finale è 100% + 600% = 700% del prezzo iniziale.<br>
+          700% di 10 € = 70 €.<br><br>
+          <strong>Diminuzione del 600%:</strong><br>
+          Se provo a diminuire 70 € del 600%, dovrei togliere 600% di 70 €, cioè 420 €.<br>
+          70 € - 420 € = -350 €.<br><br>
+          <strong>Conclusione:</strong> un prezzo negativo non ha senso. Quindi l'affermazione è falsa: alcune percentuali, nel mondo reale, non possono essere usate in modo simmetrico.`
+      },
+      {
+        text: "Se aumento un prezzo del 50% e poi lo diminuisco del 50%, torno al prezzo iniziale.",
+        answer: false,
+        solution: `Partiamo da 100 €.<br><br>
+          <strong>Primo passaggio: aumento del 50%.</strong><br>
+          50% di 100 € = 50 €.<br>
+          100 € + 50 € = 150 €.<br><br>
+          <strong>Secondo passaggio: diminuzione del 50%.</strong><br>
+          Attenzione: ora il 50% si calcola su 150 €, non più su 100 €.<br>
+          50% di 150 € = 75 €.<br>
+          150 € - 75 € = 75 €.<br><br>
+          <strong>Conclusione:</strong> il prezzo finale è 75 €, non 100 €. L'affermazione è falsa perché la base di calcolo cambia.`
+      },
+      {
+        text: "Uno sconto del 30% seguito da un altro sconto del 30% equivale a uno sconto totale del 60%.",
+        answer: false,
+        solution: `Partiamo da un prezzo di 100 €.<br><br>
+          <strong>Primo sconto del 30%:</strong><br>
+          30% di 100 € = 30 €.<br>
+          100 € - 30 € = 70 €.<br><br>
+          <strong>Secondo sconto del 30%:</strong><br>
+          Il secondo sconto si calcola sul nuovo prezzo, cioè su 70 €.<br>
+          30% di 70 € = 21 €.<br>
+          70 € - 21 € = 49 €.<br><br>
+          <strong>Controlliamo lo sconto totale:</strong><br>
+          Da 100 € siamo arrivati a 49 €.<br>
+          Abbiamo risparmiato 51 €, cioè il 51% di 100 €.<br><br>
+          <strong>Conclusione:</strong> due sconti del 30% non fanno uno sconto del 60%. L'affermazione è falsa.`
+      },
+      {
+        text: "Se raddoppio una quantità e poi la dimezzo, torno sempre al valore di partenza.",
+        answer: true,
+        solution: `Partiamo da 40.<br><br>
+          <strong>Raddoppiare</strong> significa moltiplicare per 2:<br>
+          40 × 2 = 80.<br><br>
+          <strong>Dimezzare</strong> significa dividere per 2:<br>
+          80 : 2 = 40.<br><br>
+          <strong>Conclusione:</strong> in questo caso si torna al numero iniziale. L'affermazione è vera perché moltiplicare per 2 e poi dividere per 2 sono operazioni inverse.`
+      },
+      {
+        text: "Se una classe passa da 20 a 30 studenti e poi torna a 20, la percentuale di aumento e quella di diminuzione sono uguali.",
+        answer: false,
+        solution: `Partiamo da una classe con 20 studenti.<br><br>
+          <strong>Da 20 a 30 studenti:</strong><br>
+		L'aumento è di 10 studenti.<br>
+          10 su 20 = 10/20 = 0,5 = 50%.<br><br>
+          <strong>Da 30 a 20 studenti:</strong><br>
+          La diminuzione è di 10 studenti.<br>
+          10 su 30 = 10/30 = 0,333... = circa 33,3%.<br><br>
+          <strong>Conclusione:</strong> le percentuali non sono uguali perché cambia la base di calcolo.`
+      }
+    ];
+
+    const container = document.getElementById("exercises");
+
+    exercises.forEach((exercise, index) => {
+      const card = document.createElement("section");
+      card.className = "exercise";
+
+      card.innerHTML = `
+        <h2>Esercizio ${index + 1}</h2>
+        <p class="statement">“${exercise.text}”<br><strong>Vero o falso? Argomenta.</strong></p>
+        <div class="controls">
+          <button class="choice" data-choice="true">Vero</button>
+          <button class="choice" data-choice="false">Falso</button>
+          <button class="solution-toggle">Mostra soluzione</button>
+        </div>
+        <p class="feedback"></p>
+        <div class="solution">
+          <strong>Soluzione:</strong> ${exercise.solution}
+        </div>
+      `;
+
+      const choiceButtons = card.querySelectorAll(".choice");
+      const feedback = card.querySelector(".feedback");
+      const solution = card.querySelector(".solution");
+      const solutionToggle = card.querySelector(".solution-toggle");
+
+      choiceButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          choiceButtons.forEach(btn => btn.classList.remove("selected"));
+          button.classList.add("selected");
+
+          const selected = button.dataset.choice === "true";
+          const isCorrect = selected === exercise.answer;
+
+          feedback.className = "feedback " + (isCorrect ? "correct" : "wrong");
+          feedback.textContent = isCorrect
+            ? "Risposta corretta."
+            : "Risposta non corretta.";
+        });
+      });
+
+      solutionToggle.addEventListener("click", () => {
+        solution.classList.toggle("open");
+        solutionToggle.textContent = solution.classList.contains("open")
+          ? "Nascondi soluzione"
+          : "Mostra soluzione";
+      });
+
+      container.appendChild(card);
+    });
+
   </script>
 </body>
 </html>
