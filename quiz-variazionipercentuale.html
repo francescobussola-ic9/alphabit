@@ -220,7 +220,75 @@
   </footer>
 
   <script>
-    const exercises = [
-      {
+          Aumentare del 20% significa moltiplicare per <code class="math">1,2</code>.<br>
+          Dopo l'aumento otteniamo:<br>
+          <code class="math">1,2y</code>.<br><br>
+          <strong>Secondo passaggio: diminuzione del 20%.</strong><br>
+          Diminuire del 20% significa tenere l'80%, cioè moltiplicare per <code class="math">0,8</code>.<br>
+          Quindi:<br><br>
+          <code class="math">1,2y × 0,8 = 0,96y</code><br><br>
+          <strong>Conclusione:</strong> il risultato finale è <code class="math">0,96y</code>, cioè il 96% del valore iniziale. Non si torna a <code class="math">y</code>, perché il 20% viene calcolato su basi diverse.`
+      }
+    ];
+
+    const container = document.getElementById("exercises");
+
+    exercises.forEach((exercise, index) => {
+      const card = document.createElement("section");
+      card.className = "exercise";
+
+      const optionsHtml = exercise.options.map((option, optionIndex) => `
+        <button class="answer-button" data-index="${optionIndex}">
+          ${String.fromCharCode(65 + optionIndex)}) ${option}
+        </button>
+      `).join("");
+
+      card.innerHTML = `
+        <h2>Esercizio ${index + 1}</h2>
+        <p class="statement">${exercise.text}</p>
+        <div class="answers">
+          ${optionsHtml}
+        </div>
+        <p class="feedback" aria-live="polite"></p>
+        <div class="bottom-row">
+          <button class="solution-toggle">Mostra soluzione</button>
+        </div>
+        <div class="solution">
+          <strong>Soluzione:</strong><br><br>${exercise.solution}
+        </div>
+      `;
+
+      const answerButtons = card.querySelectorAll(".answer-button");
+      const feedback = card.querySelector(".feedback");
+      const solution = card.querySelector(".solution");
+      const solutionToggle = card.querySelector(".solution-toggle");
+
+      answerButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          answerButtons.forEach(btn => {
+            btn.classList.remove("selected", "correct", "wrong");
+          });
+
+          const selectedIndex = Number(button.dataset.index);
+          const isCorrect = selectedIndex === exercise.correctIndex;
+
+          button.classList.add("selected", isCorrect ? "correct" : "wrong");
+          feedback.className = "feedback " + (isCorrect ? "correct" : "wrong");
+          feedback.textContent = isCorrect
+            ? "Risposta corretta. Ora controlla se il tuo ragionamento coincide con la soluzione."
+            : "Risposta non corretta. Attenzione: controlla se stai calcolando solo l'aumento o il valore finale.";
+        });
+      });
+
+      solutionToggle.addEventListener("click", () => {
+        solution.classList.toggle("open");
+        solutionToggle.textContent = solution.classList.contains("open")
+          ? "Nascondi soluzione"
+          : "Mostra soluzione";
+      });
+
+      container.appendChild(card);
+    });
+  </script>
 </body>
 </html>
