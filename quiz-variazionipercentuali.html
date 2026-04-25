@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quiz! Le percentuali</title>
+  <title>Quiz! Percentuali e variazioni</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -17,6 +17,8 @@
       --ko: #b91c1c;
       --border: #e5e7eb;
       --soft-blue: #eff6ff;
+      --soft-green: #ecfdf5;
+      --soft-red: #fef2f2;
     }
 
     * {
@@ -111,43 +113,40 @@
       margin: 0 0 18px;
     }
 
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
+    .answers {
+      display: grid;
       gap: 10px;
-      align-items: center;
       margin-bottom: 12px;
     }
 
-    button {
-      border-radius: 999px;
-      padding: 10px 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.12s ease, background 0.12s ease;
-      font-family: inherit;
-    }
-
-    button:hover {
-      transform: translateY(-1px);
-    }
-
-    .choice {
+    .answer-button {
+      width: 100%;
+      text-align: left;
+      border: 1px solid #bfdbfe;
+      border-radius: 14px;
+      padding: 12px 14px;
       background: var(--soft-blue);
       color: var(--primary);
-      border: 1px solid #bfdbfe;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
     }
 
-    .choice.selected {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
+    .answer-button:hover {
+      background: #dbeafe;
     }
 
-    .solution-toggle {
-      background: #f3f4f6;
-      color: #374151;
-      border: 1px solid var(--border);
+    .answer-button.selected.correct {
+      background: var(--soft-green);
+      border-color: #86efac;
+      color: var(--ok);
+    }
+
+    .answer-button.selected.wrong {
+      background: var(--soft-red);
+      border-color: #fecaca;
+      color: var(--ko);
     }
 
     .feedback {
@@ -162,6 +161,18 @@
 
     .feedback.wrong {
       color: var(--ko);
+    }
+
+    .solution-toggle {
+      margin-top: 10px;
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid var(--border);
+      font-family: inherit;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     .solution {
@@ -179,6 +190,14 @@
 
     .solution strong {
       color: var(--primary);
+    }
+
+    code.math {
+      font-family: "Times New Roman", serif;
+      font-size: 1.1em;
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 6px;
     }
 
     footer {
@@ -199,13 +218,13 @@
   </nav>
 
   <header>
-    <h1>Capire le percentuali: variazioni e trasformazioni</h1>
-    <p>Verifica se hai davvero compreso come funzionano le percentuali!</p>
+    <h1>Percentuali e variazioni</h1>
+    <p>Trasformare aumenti e diminuzioni percentuali in espressioni matematiche.</p>
   </header>
 
   <main>
     <section class="intro">
-      <p><strong>Come funziona:</strong> prendi un foglio di carta e una penna e leggi ogni domanda. Dopo aver ragionato, scegli una risposta e controlla se la tua idea è giusta. Poi puoi aprire la soluzione per vedere il ragionamento passo dopo passo.</p>
+      <p><strong>Come funziona:</strong> leggi ogni domanda, ragiona sul foglio e scegli la risposta corretta. Poi apri la soluzione per controllare il procedimento.</p>
     </section>
 
     <div id="exercises"></div>
@@ -218,64 +237,61 @@
   <script>
     const exercises = [
       {
-        text: "Il prezzo di un oggetto può aumentare del 600% e può anche diminuire del 600%.",
-        answer: false,
-        solution: `Facciamo un esempio con un prezzo iniziale di 10 €.<br><br>
-        <strong>Aumento del 600%:</strong><br>
-        600% di 10 € = 60 €.<br>
-        10 € + 60 € = 70 €.<br><br>
-        Aumentare del 600% significa arrivare al 700% del prezzo iniziale, cioè moltiplicare per 7.<br><br>
-        <strong>Diminuzione del 600%:</strong><br>
-        Se provo a diminuire 70 € del 600%, devo togliere 420 €.<br>
-        70 € - 420 € = -350 €.<br><br>
-        <strong>Conclusione:</strong> un prezzo negativo non ha senso. L'affermazione è falsa.`
+        text: "Considera un segmento di lunghezza a. Se aumenta del 20%, quale espressione rappresenta la nuova lunghezza?",
+        options: ["a + 20", "1,2a", "0,2a", "a²"],
+        correctIndex: 1,
+        solution: `Partiamo dalla lunghezza iniziale <code class="math">a</code>.<br><br>
+        Aumentare del 20% significa aggiungere il 20% di <code class="math">a</code>.<br><br>
+        Il 20% di <code class="math">a</code> è <code class="math">0,2a</code>.<br>
+        Quindi:<br><br>
+        <code class="math">a + 0,2a = 1,2a</code><br><br>
+        <strong>Conclusione:</strong> la nuova lunghezza è <code class="math">1,2a</code>.`
       },
       {
-        text: "Se aumento un prezzo del 50% e poi lo diminuisco del 50%, torno al prezzo iniziale.",
-        answer: false,
-        solution: `Partiamo da 100 €.<br><br>
-        <strong>Aumento del 50%:</strong><br>
-        50% di 100 € = 50 €.<br>
-        100 € + 50 € = 150 €.<br><br>
-        <strong>Diminuzione del 50%:</strong><br>
-        Ora il 50% si calcola su 150 €.<br>
-        50% di 150 € = 75 €.<br>
-        150 € - 75 € = 75 €.<br><br>
-        <strong>Conclusione:</strong> il prezzo finale è 75 €, non 100 €. L'affermazione è falsa.`
+        text: "Un prezzo p diminuisce del 30%. Qual è la nuova espressione?",
+        options: ["p - 30", "0,3p", "0,7p", "1,3p"],
+        correctIndex: 2,
+        solution: `Partiamo dal prezzo iniziale <code class="math">p</code>.<br><br>
+        Diminuire del 30% significa togliere il 30%, quindi resta il 70%.<br><br>
+        Il 70% di <code class="math">p</code> è <code class="math">0,7p</code>.<br><br>
+        Oppure:<br>
+        <code class="math">p - 0,3p = 0,7p</code><br><br>
+        <strong>Conclusione:</strong> la nuova espressione è <code class="math">0,7p</code>.`
       },
       {
-        text: "Uno sconto del 30% seguito da un altro sconto del 30% equivale a uno sconto totale del 60%.",
-        answer: false,
-        solution: `Partiamo da 100 €.<br><br>
-        <strong>Primo sconto:</strong><br>
-        30% di 100 € = 30 €.<br>
-        100 € - 30 € = 70 €.<br><br>
-        <strong>Secondo sconto:</strong><br>
-        30% di 70 € = 21 €.<br>
-        70 € - 21 € = 49 €.<br><br>
-        <strong>Conclusione:</strong> il prezzo finale è 49 €, quindi lo sconto totale è del 51%, non del 60%.`
+        text: "Una quantità x aumenta del 150%. Qual è il risultato?",
+        options: ["1,5x", "2,5x", "x + 150", "0,5x"],
+        correctIndex: 1,
+        solution: `Partiamo dalla quantità iniziale <code class="math">x</code>.<br><br>
+        Aumentare del 150% significa aggiungere il 150% di <code class="math">x</code>.<br><br>
+        Il 150% di <code class="math">x</code> è <code class="math">1,5x</code>.<br>
+        Quindi:<br><br>
+        <code class="math">x + 1,5x = 2,5x</code><br><br>
+        <strong>Conclusione:</strong> il risultato finale è <code class="math">2,5x</code>.`
       },
       {
-        text: "Se raddoppio una quantità e poi la dimezzo, torno sempre al valore di partenza.",
-        answer: true,
-        solution: `Partiamo da 40.<br><br>
-        Raddoppiare significa moltiplicare per 2:<br>
-        40 × 2 = 80.<br><br>
-        Dimezzare significa dividere per 2:<br>
-        80 : 2 = 40.<br><br>
-        <strong>Conclusione:</strong> l'affermazione è vera. Le due operazioni sono inverse.`
+        text: "Un quadrato ha lato a. Se il lato aumenta del 10%, quale espressione rappresenta l’area del nuovo quadrato?",
+        options: ["1,1a²", "1,21a²", "0,1a²", "a² + 10"],
+        correctIndex: 1,
+        solution: `Il lato iniziale è <code class="math">a</code>.<br><br>
+        Se il lato aumenta del 10%, il nuovo lato diventa:<br><br>
+        <code class="math">a + 0,1a = 1,1a</code><br><br>
+        L'area di un quadrato si calcola facendo lato × lato.<br>
+        Quindi la nuova area è:<br><br>
+        <code class="math">1,1a × 1,1a = 1,21a²</code><br><br>
+        <strong>Conclusione:</strong> la nuova area è <code class="math">1,21a²</code>, non <code class="math">1,1a²</code>.`
       },
       {
-        text: "Se una classe passa da 20 a 30 studenti e poi torna a 20, la percentuale di aumento e quella di diminuzione sono uguali.",
-        answer: false,
-        solution: `Partiamo da 20 studenti.<br><br>
-        <strong>Da 20 a 30:</strong><br>
-        L'aumento è di 10 studenti.<br>
-        10 su 20 = 10/20 = 0,5 = 50%.<br><br>
-        <strong>Da 30 a 20:</strong><br>
-        La diminuzione è di 10 studenti.<br>
-        10 su 30 = 10/30 = 0,333... = circa 33,3%.<br><br>
-        <strong>Conclusione:</strong> le percentuali sono diverse perché cambia la base di calcolo.`
+        text: "Una quantità y prima aumenta del 20% e poi diminuisce del 20%. Qual è il risultato finale?",
+        options: ["y", "0,96y", "0,8y", "1,04y"],
+        correctIndex: 1,
+        solution: `Partiamo dalla quantità iniziale <code class="math">y</code>.<br><br>
+        Aumentare del 20% significa moltiplicare per <code class="math">1,2</code>.<br>
+        Dopo l'aumento otteniamo <code class="math">1,2y</code>.<br><br>
+        Diminuire del 20% significa tenere l'80%, cioè moltiplicare per <code class="math">0,8</code>.<br><br>
+        Quindi:<br>
+        <code class="math">1,2y × 0,8 = 0,96y</code><br><br>
+        <strong>Conclusione:</strong> il risultato finale è <code class="math">0,96y</code>, cioè il 96% del valore iniziale.`
       }
     ];
 
@@ -285,37 +301,45 @@
       const card = document.createElement("section");
       card.className = "exercise";
 
+      const optionsHtml = exercise.options.map((option, optionIndex) => `
+        <button class="answer-button" data-index="${optionIndex}">
+          ${String.fromCharCode(65 + optionIndex)}) ${option}
+        </button>
+      `).join("");
+
       card.innerHTML = `
         <h2>Esercizio ${index + 1}</h2>
-        <p class="statement">“${exercise.text}”<br><strong>Vero o falso? Argomenta.</strong></p>
-        <div class="controls">
-          <button class="choice" data-choice="true">Vero</button>
-          <button class="choice" data-choice="false">Falso</button>
-          <button class="solution-toggle">Mostra soluzione</button>
+        <p class="statement">${exercise.text}</p>
+        <div class="answers">
+          ${optionsHtml}
         </div>
         <p class="feedback" aria-live="polite"></p>
+        <button class="solution-toggle">Mostra soluzione</button>
         <div class="solution">
           <strong>Soluzione:</strong><br><br>${exercise.solution}
         </div>
       `;
 
-      const choiceButtons = card.querySelectorAll(".choice");
+      const answerButtons = card.querySelectorAll(".answer-button");
       const feedback = card.querySelector(".feedback");
       const solution = card.querySelector(".solution");
       const solutionToggle = card.querySelector(".solution-toggle");
 
-      choiceButtons.forEach(button => {
+      answerButtons.forEach(button => {
         button.addEventListener("click", () => {
-          choiceButtons.forEach(btn => btn.classList.remove("selected"));
-          button.classList.add("selected");
+          answerButtons.forEach(btn => {
+            btn.classList.remove("selected", "correct", "wrong");
+          });
 
-          const selected = button.dataset.choice === "true";
-          const isCorrect = selected === exercise.answer;
+          const selectedIndex = Number(button.dataset.index);
+          const isCorrect = selectedIndex === exercise.correctIndex;
+
+          button.classList.add("selected", isCorrect ? "correct" : "wrong");
 
           feedback.className = "feedback " + (isCorrect ? "correct" : "wrong");
           feedback.textContent = isCorrect
             ? "Risposta corretta."
-            : "Risposta non corretta. Controlla bene qual è la base su cui calcoli la percentuale.";
+            : "Risposta non corretta. Controlla bene se hai calcolato il valore finale oppure solo la variazione.";
         });
       });
 
