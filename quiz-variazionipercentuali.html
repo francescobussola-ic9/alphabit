@@ -219,76 +219,67 @@
     CC BY-NC 4.0 Francesco Bussola – alphabit, IC9 Verona
   </footer>
 
-  <script>
-          Aumentare del 20% significa moltiplicare per <code class="math">1,2</code>.<br>
-          Dopo l'aumento otteniamo:<br>
-          <code class="math">1,2y</code>.<br><br>
-          <strong>Secondo passaggio: diminuzione del 20%.</strong><br>
-          Diminuire del 20% significa tenere l'80%, cioè moltiplicare per <code class="math">0,8</code>.<br>
-          Quindi:<br><br>
-          <code class="math">1,2y × 0,8 = 0,96y</code><br><br>
-          <strong>Conclusione:</strong> il risultato finale è <code class="math">0,96y</code>, cioè il 96% del valore iniziale. Non si torna a <code class="math">y</code>, perché il 20% viene calcolato su basi diverse.`
-      }
-    ];
-
-    const container = document.getElementById("exercises");
-
-    exercises.forEach((exercise, index) => {
-      const card = document.createElement("section");
-      card.className = "exercise";
-
-      const optionsHtml = exercise.options.map((option, optionIndex) => `
-        <button class="answer-button" data-index="${optionIndex}">
-          ${String.fromCharCode(65 + optionIndex)}) ${option}
-        </button>
-      `).join("");
-
-      card.innerHTML = `
-        <h2>Esercizio ${index + 1}</h2>
-        <p class="statement">${exercise.text}</p>
-        <div class="answers">
-          ${optionsHtml}
-        </div>
-        <p class="feedback" aria-live="polite"></p>
-        <div class="bottom-row">
-          <button class="solution-toggle">Mostra soluzione</button>
-        </div>
-        <div class="solution">
-          <strong>Soluzione:</strong><br><br>${exercise.solution}
-        </div>
-      `;
-
-      const answerButtons = card.querySelectorAll(".answer-button");
-      const feedback = card.querySelector(".feedback");
-      const solution = card.querySelector(".solution");
-      const solutionToggle = card.querySelector(".solution-toggle");
-
-      answerButtons.forEach(button => {
-        button.addEventListener("click", () => {
-          answerButtons.forEach(btn => {
-            btn.classList.remove("selected", "correct", "wrong");
-          });
-
-          const selectedIndex = Number(button.dataset.index);
-          const isCorrect = selectedIndex === exercise.correctIndex;
-
-          button.classList.add("selected", isCorrect ? "correct" : "wrong");
-          feedback.className = "feedback " + (isCorrect ? "correct" : "wrong");
-          feedback.textContent = isCorrect
-            ? "Risposta corretta. Ora controlla se il tuo ragionamento coincide con la soluzione."
-            : "Risposta non corretta. Attenzione: controlla se stai calcolando solo l'aumento o il valore finale.";
-        });
-      });
-
-      solutionToggle.addEventListener("click", () => {
-        solution.classList.toggle("open");
-        solutionToggle.textContent = solution.classList.contains("open")
-          ? "Nascondi soluzione"
-          : "Mostra soluzione";
-      });
-
-      container.appendChild(card);
-    });
+  
+	<script>
+    const exercises = [
+      {
+        text: "Il prezzo di un oggetto può aumentare del 600% e può anche diminuire del 600%.",
+        answer: false,
+        solution: `Facciamo un esempio con un prezzo iniziale di 10 €.<br><br>
+          <strong>Aumento del 600%:</strong><br>
+          600% di 10 € = 60 €.<br>
+          Quindi il nuovo prezzo è 10 € + 60 € = 70 €.<br><br>
+          Oppure: aumentare del 600% significa moltiplicare per 7, perché il prezzo finale è 100% + 600% = 700% del prezzo iniziale.<br>
+          700% di 10 € = 70 €.<br><br>
+          <strong>Diminuzione del 600%:</strong><br>
+          Se provo a diminuire 70 € del 600%, dovrei togliere 600% di 70 €, cioè 420 €.<br>
+          70 € - 420 € = -350 €.<br><br>
+          <strong>Conclusione:</strong> un prezzo negativo non ha senso. Quindi l'affermazione è falsa: alcune percentuali, nel mondo reale, non possono essere usate in modo simmetrico.`
+      },
+      {
+        text: "Se aumento un prezzo del 50% e poi lo diminuisco del 50%, torno al prezzo iniziale.",
+        answer: false,
+        solution: `Partiamo da 100 €.<br><br>
+          <strong>Primo passaggio: aumento del 50%.</strong><br>
+          50% di 100 € = 50 €.<br>
+          100 € + 50 € = 150 €.<br><br>
+          <strong>Secondo passaggio: diminuzione del 50%.</strong><br>
+          Attenzione: ora il 50% si calcola su 150 €, non più su 100 €.<br>
+          50% di 150 € = 75 €.<br>
+          150 € - 75 € = 75 €.<br><br>
+          <strong>Conclusione:</strong> il prezzo finale è 75 €, non 100 €. L'affermazione è falsa perché la base di calcolo cambia.`
+      },
+      {
+        text: "Uno sconto del 30% seguito da un altro sconto del 30% equivale a uno sconto totale del 60%.",
+        answer: false,
+        solution: `Partiamo da un prezzo di 100 €.<br><br>
+          <strong>Primo sconto del 30%:</strong><br>
+          30% di 100 € = 30 €.<br>
+          100 € - 30 € = 70 €.<br><br>
+          <strong>Secondo sconto del 30%:</strong><br>
+          Il secondo sconto si calcola sul nuovo prezzo, cioè su 70 €.<br>
+          30% di 70 € = 21 €.<br>
+          70 € - 21 € = 49 €.<br><br>
+          <strong>Controlliamo lo sconto totale:</strong><br>
+          Da 100 € siamo arrivati a 49 €.<br>
+          Abbiamo risparmiato 51 €, cioè il 51% di 100 €.<br><br>
+          <strong>Conclusione:</strong> due sconti del 30% non fanno uno sconto del 60%. L'affermazione è falsa.`
+      },
+      {
+        text: "Se raddoppio una quantità e poi la dimezzo, torno sempre al valore di partenza.",
+        answer: true,
+        solution: `Partiamo da 40.<br><br>
+          <strong>Raddoppiare</strong> significa moltiplicare per 2:<br>
+          40 × 2 = 80.<br><br>
+          <strong>Dimezzare</strong> significa dividere per 2:<br>
+          80 : 2 = 40.<br><br>
+          <strong>Conclusione:</strong> in questo caso si torna al numero iniziale. L'affermazione è vera perché moltiplicare per 2 e poi dividere per 2 sono operazioni inverse.`
+      },
+      {
+        text: "Se una classe passa da 20 a 30 studenti e poi torna a 20, la percentuale di aumento e quella di diminuzione sono uguali.",
+        answer: false,
+        solution: `Partiamo da una classe con 20 studenti.<br><br>
+          <strong>Da 20 a 30 studenti:</strong><br>
   </script>
 </body>
 </html>
