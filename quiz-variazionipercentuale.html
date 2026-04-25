@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz! Le percentuali</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --primary-dark: #4078B2;
+      --ok: #15803d;
+      --ko: #b91c1c;
+      --border: #e5e7eb;
+      --soft-blue: #eff6ff;
+      --soft-green: #ecfdf5;
+      --soft-red: #fef2f2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4078B2, #3b82f6);
+      color: white;
+      padding: 42px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    header p {
+      margin: 0 auto;
+      max-width: 760px;
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    main {
+      width: min(1000px, 94%);
+      margin: 32px auto 60px;
+    }
+
+    .intro {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .exercise {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .exercise h2 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+    }
+
+    .statement {
+      font-size: 1.15rem;
+      margin: 0 0 18px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.12s ease, opacity 0.12s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .choice {
+      background: var(--soft-blue);
+      color: var(--primary-dark);
+      border: 1px solid #bfdbfe;
+    }
+
+    .choice.selected {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .solution-toggle {
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid var(--border);
+    }
+
+    .feedback {
+      min-height: 28px;
+      margin: 8px 0 0;
+      font-weight: 700;
+    }
+
+    .feedback.correct {
+      color: var(--ok);
+    }
+
+    .feedback.wrong {
+      color: var(--ko);
+    }
+
+    .solution {
+      display: none;
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #f9fafb;
+      border: 1px dashed #cbd5e1;
+    }
+
+    .solution.open {
+      display: block;
+    }
+
+    .solution strong {
+      color: var(--primary-dark);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 20px;
+      font-size: 0.95rem;
+    }
+	.header-img {
+	  width: 100%;
+	  max-height: 420px;
+	  object-fit: cover;
+	  border-radius: 0 0 20px 20px;
+	  margin-bottom: 10px;
+	}
+	.top-menu {
+		width: 100%;
+		background: #ffffff;
+		padding: 12px 30px;
+		display: flex;
+		justify-content: flex-end; /* allinea a destra */
+		align-items: center;
+		border-bottom: 1px solid #e5e7eb;
+	  }
+
+	  .top-menu a {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 14pt;
+		text-decoration: none;
+		color: #1f2937;
+		font-weight: 400;
+	  }
+
+	  .top-menu a:hover {
+		color: #2563eb;
+	  }
+
+  </style>
+</head>
+<body>
+	<div>
+		<img src="images/headeralphabit.png" width="80%" alt="Header" class="header-img">
+	</div>
+  <nav class="top-menu">
+    <a href="https://sites.google.com/ic9verona.edu.it/alphabit/home-page">Home</a>
+  </nav>
+
+  <header>
+    <h1>Capire le percentuali: variazioni e trasformazioni</h1>
+    <p>Verifica se hai davvero compreso come funzionano le percentuali!</p>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p><strong>Come funziona:</strong> prendi un foglio di carta e una penna e leggi ogni domanda. Dopo aver ragionato, scegli una risposta e controlla se la tua idea è giusta. Poi puoi aprire la soluzione per vedere il ragionamento passo dopo passo.</p>
+    </section>
+
+    <div id="exercises"></div>
+  </main>
+
+  <footer>
+    CC BY-NC 4.0 Francesco Bussola – alphabit, IC9 Verona
+  </footer>
+
+  <script>
+    const exercises = [
+      {
+</body>
+</html>
