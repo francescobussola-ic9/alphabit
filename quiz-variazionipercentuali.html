@@ -238,25 +238,26 @@
     const exercises = [
       {
         text: "Considera un segmento di lunghezza a. Se aumenta del 20%, quale espressione rappresenta la nuova lunghezza?",
-        options: ["a + 20", "1,2a", "0,2a", "a²"],
+        options: ["a + 30", "1,3a", "0,3a", "a²"],
         correctIndex: 1,
         solution: `Partiamo dalla lunghezza iniziale <code class="math">a</code>.<br><br>
-        Aumentare del 20% significa aggiungere il 20% di <code class="math">a</code>.<br><br>
-        Il 20% di <code class="math">a</code> è <code class="math">0,2a</code>.<br>
+        Aumentare del 30% significa aggiungere il 30% di <code class="math">a</code>.<br><br>
+        Il 30% di <code class="math">a</code> è <code class="math">a : 100 • 3</code> cioè <code class="math">0,3a</code>.<br>
         Quindi:<br><br>
-        <code class="math">a + 0,2a = 1,2a</code><br><br>
-        <strong>Conclusione:</strong> la nuova lunghezza è <code class="math">1,2a</code>.`
+        <code class="math">a + 0,3a = 1,3a</code><br><br>
+        <strong>Conclusione:</strong> la nuova lunghezza è <code class="math">1,3a</code>.`
       },
       {
-        text: "Un prezzo p diminuisce del 30%. Qual è la nuova espressione?",
-        options: ["p - 30", "0,3p", "0,7p", "1,3p"],
+        text: "Un prezzo p diminuisce del 15%. Qual è la nuova espressione?",
+        options: ["p - 15", "0,15p", "0,85p", "1,15p"],
         correctIndex: 2,
         solution: `Partiamo dal prezzo iniziale <code class="math">p</code>.<br><br>
-        Diminuire del 30% significa togliere il 30%, quindi resta il 70%.<br><br>
-        Il 70% di <code class="math">p</code> è <code class="math">0,7p</code>.<br><br>
+        Diminuire del 15% significa togliere il 15%, quindi resta il 85%.<br><br>
+        L'85% di <code class="math">p</code> è <code class="math">p : 100 • 85</code> cioè
+        <code class="math">0,85p</code>.<br><br>
         Oppure:<br>
-        <code class="math">p - 0,3p = 0,7p</code><br><br>
-        <strong>Conclusione:</strong> la nuova espressione è <code class="math">0,7p</code>.`
+        <code class="math">p - 0,15p = 0,85p</code><br><br>
+        <strong>Conclusione:</strong> la nuova espressione è <code class="math">0,85p</code>.`
       },
       {
         text: "Una quantità x aumenta del 150%. Qual è il risultato?",
@@ -270,16 +271,16 @@
         <strong>Conclusione:</strong> il risultato finale è <code class="math">2,5x</code>.`
       },
       {
-        text: "Un quadrato ha lato a. Se il lato aumenta del 10%, quale espressione rappresenta l’area del nuovo quadrato?",
-        options: ["1,1a²", "1,21a²", "0,1a²", "a² + 10"],
+        text: "Un quadrato ha lato ℓ. Se il lato aumenta del 10%, quale espressione rappresenta l’area del nuovo quadrato?",
+        options: ["1,1ℓ²", "1,21ℓ²", "0,1ℓ²", "ℓ² + 10"],
         correctIndex: 1,
-        solution: `Il lato iniziale è <code class="math">a</code>.<br><br>
+        solution: `Il lato iniziale è <code class="math">ℓ</code>.<br><br>
         Se il lato aumenta del 10%, il nuovo lato diventa:<br><br>
-        <code class="math">a + 0,1a = 1,1a</code><br><br>
+        <code class="math">ℓ + 0,1ℓ = 1,1ℓ</code><br><br>
         L'area di un quadrato si calcola facendo lato × lato.<br>
         Quindi la nuova area è:<br><br>
-        <code class="math">1,1a × 1,1a = 1,21a²</code><br><br>
-        <strong>Conclusione:</strong> la nuova area è <code class="math">1,21a²</code>, non <code class="math">1,1a²</code>.`
+        <code class="math">1,1ℓ × 1,1ℓ = 1,21ℓ²</code><br><br>
+        <strong>Conclusione:</strong> la nuova area è <code class="math">1,21ℓ²</code>, non <code class="math">1,1ℓ²</code>.`
       },
       {
         text: "Una quantità y prima aumenta del 20% e poi diminuisce del 20%. Qual è il risultato finale?",
